@@ -1,6 +1,14 @@
 import {initializeApp} from 'firebase/app'
-import {getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc} from 'firebase/firestore'
+import
+{
+    getAuth,
+    signInWithRedirect,
+    signInWithPopup,
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword
+} from 'firebase/auth'
+
+import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -14,33 +22,48 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig)
 
-const provider = new GoogleAuthProvider()
-provider.setCustomParameters({
-    prompt : "select_account"
+const googleProvider = new GoogleAuthProvider()
+googleProvider.setCustomParameters({
+    prompt: "select_account"
 
 })
 
 export const auth = getAuth()
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+
+export function signInWithGooglePopup() {
+    signInWithPopup(auth, googleProvider)
+}
+
+export function signInWithGoogleRedirect() {
+    signInWithRedirect(auth, googleProvider)
+}
 
 export const db = getFirestore();
 
-export async function createUserDocumentFromAuth(userAuth){
+export async function createUserDocumentFromAuth(userAuth, otherDetails) {
+    if(!userAuth) return
     const userDocRef = doc(db, 'users', userAuth.uid)
     const userSnapchat = await getDoc(userDocRef)
-    if(!userSnapchat.exists()){
-        const { displayName, email} = userAuth
+    if (!userSnapchat.exists()) {
+        const {displayName, email} = userAuth
         const createdAt = new Date()
 
-        try{
+        try {
             await setDoc(userDocRef, {
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...otherDetails
             })
-        } catch(error){
+        } catch (error) {
             console.log('error creating the user', error.message)
         }
     }
     return userDocRef
+}
+
+export async function createAuthUserWithEmailAndPassword(email, password){
+    if(!email || !password) return
+
+    return await createUserWithEmailAndPassword(auth, email, password)
 }
