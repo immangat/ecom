@@ -1,13 +1,26 @@
-import { Outlet, Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/mlogo.svg";
+import {Outlet, Link} from "react-router-dom";
+import {ReactComponent as Logo} from "../../assets/mlogo.svg";
+import {UserContext} from "../../contexts/user.context";
 import "./navigation-bar.styles.scss";
+import {useContext} from "react";
+import {signOutUser} from "../../utils/firebase/firebase.utils";
 
 function Navigation() {
+    const {currentUser, setCurrentUser} = useContext(UserContext)
+
+    async function signOutHandler(){
+        try{
+            const res = await signOutUser()
+        } catch (error) {
+
+        }
+
+    }
     return (
         <>
             <div className="navigation-container">
                 <Link className="logo-container" to="/">
-                    <Logo className="logo" />
+                    <Logo className="logo"/>
                 </Link>
                 <div className="navigation-categories">
                     <Link className="nav-link" to="/shop">
@@ -16,15 +29,24 @@ function Navigation() {
                     <Link className="nav-link" to="/shop">
                         CONTACT
                     </Link>
-                    <Link className="nav-link" to="/auth">
-                        SIGN IN
-                    </Link>
+                    {
+                        currentUser ?
+                            (<span className='nav-link' onClick={signOutHandler}> SIGN OUT</span>)
+                            :
+                            (
+                                <Link className="nav-link" to="/auth">
+                                    SIGN IN
+                                </Link>
+
+                            )
+                    }
                     <Link className="nav-link" to="/shop">
+
                         CART
                     </Link>
                 </div>
             </div>
-            <Outlet />
+            <Outlet/>
         </>
     );
 }

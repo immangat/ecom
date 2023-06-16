@@ -1,7 +1,8 @@
 import FormInput from "../form-input/form-input.component";
-import {useState} from "react";
+import {useState, useContext} from "react";
 import Button from "../button/button.component";
-import {signWithFirebaseEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
+import {signWithFirebaseEmailAndPassword, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
+import userContext, {UserContext} from "../../contexts/user.context";
 import './sign-in-form.styles.scss'
 
 
@@ -11,6 +12,7 @@ function SignInForm() {
         password: "",
 
     }
+    const {setCurrentUser} = useContext(UserContext)
     const [signInFormData, setSignInForm] = useState(emptyUserDetails)
 
     function handleInput(e) {
@@ -21,9 +23,11 @@ function SignInForm() {
 
         }))
     }
-    function resetForm(){
+
+    function resetForm() {
         setSignInForm(emptyUserDetails)
     }
+
     async function signIn(event) {
         event.preventDefault()
         const {email, password} = signInFormData
@@ -31,13 +35,13 @@ function SignInForm() {
             const {user} = await signWithFirebaseEmailAndPassword(email, password)
             resetForm()
         } catch (error) {
-            switch(error.code){
+            switch (error.code) {
                 case 'auth/wrong-password':
                     alert('Incorrect Email or Password')
-                break
+                    break
                 case 'auth/user-not-found' :
                     alert('Incorrect Email or Password')
-                break
+                    break
                 default:
                     console.log(error)
             }
@@ -45,11 +49,12 @@ function SignInForm() {
 
     }
 
-    async function signInWithGoogle(event){
+    async function signInWithGoogle(event) {
         event.preventDefault()
         try {
-        const { user } = await signInWithGooglePopup()
-        } catch(error){
+            await signInWithGooglePopup()
+
+        } catch (error) {
             console.log(error)
         }
     }
@@ -70,26 +75,26 @@ function SignInForm() {
                 <FormInput
                     label='password'
                     required
-                    type = 'password'
+                    type='password'
                     name='password'
                     value={signInFormData.password}
                     onChange={handleInput}
                 />
-            <div className='sign-in-form-button-container'>
-                <Button
-                    type = 'submit'
-                >
-                    SIGN IN
-                </Button>
-                <Button
-                    type = 'button'
-                    onClick={signInWithGoogle}
-                    buttonType='google'
-                >
-                    Google Sign IN
-                </Button>
+                <div className='sign-in-form-button-container'>
+                    <Button
+                        type='submit'
+                    >
+                        SIGN IN
+                    </Button>
+                    <Button
+                        type='button'
+                        onClick={signInWithGoogle}
+                        buttonType='google'
+                    >
+                        Google Sign IN
+                    </Button>
 
-            </div>
+                </div>
             </form>
 
         </div>
