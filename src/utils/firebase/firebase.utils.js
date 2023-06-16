@@ -5,7 +5,8 @@ import
     signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider,
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
 } from 'firebase/auth'
 
 import {getFirestore, doc, getDoc, setDoc} from 'firebase/firestore'
@@ -30,8 +31,8 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth()
 
-export function signInWithGooglePopup() {
-    signInWithPopup(auth, googleProvider)
+export async function signInWithGooglePopup() {
+    return await signInWithPopup(auth, googleProvider)
 }
 
 export function signInWithGoogleRedirect() {
@@ -66,4 +67,9 @@ export async function createAuthUserWithEmailAndPassword(email, password){
     if(!email || !password) return
 
     return await createUserWithEmailAndPassword(auth, email, password)
+}
+
+export async function signWithFirebaseEmailAndPassword(email, password){
+    if(!email || !password) return
+    return await signInWithEmailAndPassword(auth,email, password)
 }

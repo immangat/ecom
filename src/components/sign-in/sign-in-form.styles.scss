@@ -1,25 +1,24 @@
-.sign-up-container{
+.sign-in-container {
   display: flex;
   flex-direction: column;
 
   width: 380px;
 
-  h2{
+  h2 {
     margin: 10px 0;
   }
 
-  .sign-up-form{
+  .sign-in-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
 
-
-    .sign-up-form-button-container{
-
-        display: flex;
-        justify-content: center;
-    }
-
   }
+}
+
+.sign-in-form-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
