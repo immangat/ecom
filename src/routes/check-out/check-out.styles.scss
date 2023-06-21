@@ -22,6 +22,13 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  .cart-price{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    width: 80%;
+  }
 }
 .checkout-header{
   width: 80%;
