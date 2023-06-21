@@ -11,6 +11,9 @@
   right: 40px;
   z-index: 5;
 
+  button{
+    padding: 0;
+  }
   .empty-message {
     font-size: 18px;
     margin: 50px auto;
@@ -23,9 +26,7 @@
     overflow: scroll;
     flex: 1;
 
-    button{
-      padding: 0;
-    }
+
   }
 
   button {

@@ -42,12 +42,12 @@ function Navigation() {
 
                             )
                     }
-                    <Link className="nav-link" to="" >
+                    <div className="nav-link" >
 
                         <CartIcon
 
                         />
-                    </Link>
+                    </div>
                 </div>
                 {
                 openState

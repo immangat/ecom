@@ -1,0 +1,18 @@
+.cartItem-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-bottom: 10px;
+  img{
+    width: 60px;
+  }
+
+  .item-info{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+  }
+}
