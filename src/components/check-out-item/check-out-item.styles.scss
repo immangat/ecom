@@ -6,6 +6,16 @@
   margin-bottom: 1%;
   align-items: center;
 
+
+
+  .quantity{
+    display: flex;
+    justify-content: space-between;
+
+    .arrow{
+      margin: 0 8px;
+    }
+  }
   img{
     width: 100px;
   }

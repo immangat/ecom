@@ -36,7 +36,7 @@ function CheckOut() {
                             {items}
                         </div>
                         <div className='cart-price'>
-                            <h1>Total Price {cartPrice}</h1>
+                            <h1>Total Price: ${cartPrice}</h1>
                         </div>
                     </div>
                     :

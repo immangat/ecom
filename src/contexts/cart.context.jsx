@@ -9,7 +9,10 @@ export const CartContext = createContext(
         addItemToCart: () => {
         },
         cartCount: 0,
-        cartPrice : 0
+        cartPrice : 0,
+        removeItemFromCart: () => {}
+        ,
+        decreaseQuantity: () => {}
     }
 )
 
@@ -25,6 +28,14 @@ function returnItems(cartItems, item) {
     return [...cartItems, {...item, quantity: 1}]
 }
 
+function removeItem(cartItems, id){
+    return cartItems.filter(item => item.id !== id)
+}
+
+function decreaseItem(cartItems, id){
+    return cartItems.map(item => item.id === id ? {...item, quantity: item.quantity - 1} : item)
+}
+
 function CartProvider({children}) {
 
     const [openState, setOpenState] = useState(null)
@@ -33,28 +44,27 @@ function CartProvider({children}) {
     const [cartPrice, setCartPrice] = useState(0)
 
     function addItemToCart(item) {
-
         setCartItems(returnItems(cartItems, item))
-
     }
 
-    function removeItem(id) {
-        setCartItems(prev => prev.filter(item => item.id !== id))
+    function removeItemFromCart(id) {
+        setCartItems(removeItem(cartItems, id))
     }
 
-    function increaseQuantity(id) {
-        setCartItems(prev => prev.map(
-            item => item.id === id ? {...item, quantity: item.quantity + 1} : item))
-    }
-
-    function decreaseQuantity(id) {
-        setCartItems(prev => prev.map(
-            item => item.id === id && item.quantity > 1 ? {...item, quantity: item.quantity - 1} : item))
-
+    function decreaseQuantity(quantity, id) {
+        if(quantity === 1){
+            setCartItems(removeItem(cartItems, id))
+            return
+        }
+        setCartItems(decreaseItem(cartItems, id))
     }
 
     useEffect(() => {
         setCartCount(cartItems.reduce((total, item) => total + item.quantity, 0))
+
+    }, [cartItems])
+
+    useEffect(()=>{
         setCartPrice(cartItems.reduce((total, item) => total + (item.quantity * item.price), 0))
     }, [cartItems])
 
@@ -64,8 +74,7 @@ function CartProvider({children}) {
         addItemToCart,
         cartItems,
         cartCount,
-        removeItem,
-        increaseQuantity,
+        removeItemFromCart,
         decreaseQuantity,
         cartPrice
     }
