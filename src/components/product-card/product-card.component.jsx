@@ -23,7 +23,7 @@ function ProductCard({info}){
                     {name}
                 </span>
                 <span className="product-price">
-                    {price}
+                    ${price}
                 </span>
             </div>
         </div>
