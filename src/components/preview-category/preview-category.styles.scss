@@ -1,0 +1,14 @@
+.preview-container{
+  display: flex;
+  flex-direction: column;
+  h2{
+    margin-left: 10%;
+  }
+
+  .product-preview-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+  }
+}
