@@ -1,4 +1,4 @@
-import './check-out-item.styles.scss'
+import {CheckOutItemContainer,Quantity,Arrow,Image,Pointer } from './check-out-item.styles'
 import {useContext} from "react";
 import {CartContext} from "../../contexts/cart.context";
 
@@ -12,17 +12,17 @@ function CheckOutItem({info}) {
 
     const {id, imageUrl, name, quantity, price} = info
     return (
-        <div className='check-out-item-container'>
-            <img src={imageUrl} alt={name}/>
+        <CheckOutItemContainer className='check-out-item-container'>
+            <Image src={imageUrl} alt={name}/>
             <span>{name}</span>
-            <div className='quantity'>
-                <span onClick={() => decreaseQuantity(quantity, id)} className='clickable arrow'> &#10094; </span>
+            <Quantity className='quantity'>
+                <Arrow onClick={() => decreaseQuantity(quantity, id)} className='clickable arrow'> &#10094; </Arrow>
                 <span > {quantity}</span>
-                <span onClick={() => addItemToCart(info)} className='clickable arrow'>&#10095;</span>
-            </div>
+                <Arrow onClick={() => addItemToCart(info)} className='clickable arrow'>&#10095;</Arrow>
+            </Quantity>
             <span>{price}</span>
-            <span onClick={() => removeItemFromCart(id)} className='clickable'>&#10005;</span>
-        </div>
+            <Pointer onClick={() => removeItemFromCart(id)} className='clickable'>&#10005;</Pointer>
+        </CheckOutItemContainer>
     )
 }
 

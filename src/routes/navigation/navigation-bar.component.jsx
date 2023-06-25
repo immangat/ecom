@@ -1,12 +1,13 @@
 import {Outlet, Link} from "react-router-dom";
 import {ReactComponent as Logo} from "../../assets/mlogo.svg";
 import {UserContext} from "../../contexts/user.context";
-import "./navigation-bar.styles.scss";
 import {useContext} from "react";
 import {signOutUser} from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
 import {CartContext} from "../../contexts/cart.context";
+import {NavigationContainer, NavLink, LogoContainer, NavLinkContainer, LogoImage} from "./navigation-bar.styles";
+
 function Navigation() {
     const {currentUser, setCurrentUser} = useContext(UserContext)
     const {openState} = useContext(CartContext)
@@ -20,25 +21,25 @@ function Navigation() {
     }
     return (
         <>
-            <div className="navigation-container">
-                <Link className="logo-container" to="/">
-                    <Logo className="logo"/>
-                </Link>
-                <div className="navigation-categories">
-                    <Link className="nav-link" to="/shop">
+            <NavigationContainer>
+                <LogoContainer to="/">
+                    <LogoImage/>
+                </LogoContainer>
+                <NavLinkContainer>
+                    <NavLink className="nav-link" to="/shop">
                         SHOP
-                    </Link>
-                    <Link className="nav-link" to="/shop">
+                    </NavLink>
+                    <NavLink className="nav-link" to="/shop">
                         CONTACT
-                    </Link>
+                    </NavLink>
                     {
                         currentUser ?
-                            (<span className='nav-link' onClick={signOutHandler}> SIGN OUT</span>)
+                            (<NavLink as='span' onClick={signOutHandler}> SIGN OUT</NavLink>)
                             :
                             (
-                                <Link className="nav-link" to="/auth">
+                                <NavLink className="nav-link" to="/auth">
                                     SIGN IN
-                                </Link>
+                                </NavLink>
 
                             )
                     }
@@ -48,13 +49,13 @@ function Navigation() {
 
                         />
                     </div>
-                </div>
+                </NavLinkContainer>
                 {
                 openState
                     &&
                 <CartDropDown />
                 }
-            </div>
+            </NavigationContainer>
             <Outlet/>
         </>
     );

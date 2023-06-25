@@ -1,9 +1,9 @@
 import FormInput from "../form-input/form-input.component";
 import {useState, useContext} from "react";
-import Button from "../button/button.component";
+import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import {signWithFirebaseEmailAndPassword, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
 import userContext, {UserContext} from "../../contexts/user.context";
-import './sign-in-form.styles.scss'
+import {SignInContainer, Heading, SignForm, ButtonContainer} from "./sign-in-form.styles";
 
 
 function SignInForm() {
@@ -60,10 +60,10 @@ function SignInForm() {
     }
 
     return (
-        <div className="sign-in-container">
-            <h2>Already have an account</h2>
+        <SignInContainer className="sign-in-container">
+            <Heading>Already have an account</Heading>
             <span> Sign in with your email and password</span>
-            <form className='sign-in-form' onSubmit={signIn}>
+            <SignForm className='sign-in-form' onSubmit={signIn}>
                 <FormInput
                     label='Email'
                     required
@@ -80,7 +80,7 @@ function SignInForm() {
                     value={signInFormData.password}
                     onChange={handleInput}
                 />
-                <div className='sign-in-form-button-container'>
+                <ButtonContainer className='sign-in-form-button-container'>
                     <Button
                         type='submit'
                     >
@@ -89,15 +89,15 @@ function SignInForm() {
                     <Button
                         type='button'
                         onClick={signInWithGoogle}
-                        buttonType='google'
+                        buttonType={BUTTON_TYPE_CLASSES.google}
                     >
                         Google Sign IN
                     </Button>
 
-                </div>
-            </form>
+                </ButtonContainer>
+            </SignForm>
 
-        </div>
+        </SignInContainer>
     )
 }
 

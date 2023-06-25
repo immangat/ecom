@@ -1,19 +1,25 @@
-import './form-input.styles.scss'
+import {GroupContainer, Input, FormInputLabel, FormInputLabelShrink} from "./form-input.styles";
+function getFormLabel(type){
+    return{
+        'base': FormInputLabel,
+        'shrink': FormInputLabelShrink
+    }[type]
 
+}
 function FormInput({label, ...otherProps}){
+    const InputLabel = getFormLabel(otherProps.value.length ? 'shrink'  : 'base')
 
     return(
-        <div className='group'>
-        <input
-            className="form-input"
+        <GroupContainer>
+        <Input
             {...otherProps}
         />
             {label
                 &&
-            <label className = {`${otherProps.value.length ? 'shrink'  : ''} form-input-label`}>{label}</label>
+            <InputLabel className = 'form-input-label'>{label}</InputLabel>
             }
 
-        </div>
+        </GroupContainer>
     )
 }
 

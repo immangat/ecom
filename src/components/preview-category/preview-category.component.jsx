@@ -1,4 +1,4 @@
-import './preview-category.styles.scss'
+import {PreviewContainer,Heading,ProductPreviewContainer  } from './preview-category.styles'
 import ProductCard from "../product-card/product-card.component";
 import {useContext} from "react";
 import {CategoriesContext} from "../../contexts/categoriesContext";
@@ -20,19 +20,19 @@ function CategoryPreview({title}) {
 
     const items = returnOnlyFour(categories[title])
     return (
-        <div className='preview-container'>
+        <PreviewContainer className='preview-container'>
 
-            <h2>
+            <Heading>
                 <Link to={`/shop/${title}`}>
                     <span>{title.toUpperCase()}</span>
                 </Link>
-            </h2>
+            </Heading>
 
 
-            <div className='product-preview-container'>
+            <ProductPreviewContainer className='product-preview-container'>
                 {items}
-            </div>
-        </div>
+            </ProductPreviewContainer>
+        </PreviewContainer>
     )
 
 }

@@ -1,5 +1,5 @@
 import {useContext, useState} from "react";
-import './sign-up.styles.scss'
+import {SignUpContainer, HeadingSignUp, Form, ButtonContainer} from "./sign-up.styles";
 import {createUserDocumentFromAuth, createAuthUserWithEmailAndPassword} from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -59,10 +59,10 @@ function SignUpForm() {
     }
 
     return (
-        <div className="sign-up-container">
-            <h2>I do not have a account</h2>
+        <SignUpContainer className="sign-up-container">
+            <HeadingSignUp>I do not have a account</HeadingSignUp>
             <span>Sign up with your email and password</span>
-            <form className="sign-up-form" onSubmit={signUp}>
+            <Form className="sign-up-form" onSubmit={signUp}>
                 <FormInput
                     label = "Display Name"
                     required
@@ -95,16 +95,16 @@ function SignUpForm() {
                     value={signUpFormData.confirmPassword}
                     onChange={handleInput}
                 />
-                <div className="sign-up-form-button-container">
+                <ButtonContainer className="sign-up-form-button-container">
                     <Button
                         type='submit'
                     >
                         SIGN UP
 
                     </Button>
-                </div>
-            </form>
-        </div>
+                </ButtonContainer>
+            </Form>
+        </SignUpContainer>
     )
 }
 

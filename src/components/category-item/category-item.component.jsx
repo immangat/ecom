@@ -1,16 +1,16 @@
 import React from "react";
-import './category-item.styles.scss'
+import {Card, BackgroundImageContainer, CardText, H2, Paragraph} from './category-item.styles'
 function CategoryItem({category}){
 
 
     return(
-        <div className="card">
-            <div className="background-image" style={{backgroundImage : `url(${category.imageUrl})`}}/>
-            <div className="card--text">
-                <h2>{category.title}</h2>
-                <p> Shop now</p>
-            </div>
-        </div>
+        <Card className="card">
+            <BackgroundImageContainer className="background-image" imageUrl = {category.imageUrl}/>
+            <CardText className="card--text">
+                <H2>{category.title}</H2>
+                <Paragraph> Shop now</Paragraph>
+            </CardText>
+        </Card>
     )
 }
 

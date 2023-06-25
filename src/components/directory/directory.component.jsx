@@ -1,5 +1,6 @@
 import CategoryItem from "../category-item/category-item.component";
-import './directory.styles.scss'
+import {Container} from './directory.styles'
+
 
 function Directory({categories}) {
 
@@ -12,12 +13,12 @@ function Directory({categories}) {
 
     return (
 
-        <div className="container">
+        <Container className="container">
 
             {cards}
 
 
-        </div>
+        </Container>
 
     )
 }
