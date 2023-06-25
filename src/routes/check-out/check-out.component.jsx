@@ -1,4 +1,11 @@
-import './check-out.styles.scss'
+import {
+    CartPrice,
+    CheckOutHeader,
+    CheckOutHeaderValues,
+    CheckOutInnerContainer,
+    CheckOutItems,
+    CheckOutOuterContainer
+} from './check-out.styles'
 import {useContext} from "react";
 import {CartContext} from "../../contexts/cart.context";
 import CheckOutItem from "../../components/check-out-item/check-out-item.component";
@@ -12,33 +19,33 @@ function CheckOut() {
         />
     ) : ''
     return (
-        <div className='checkout-outer-container'>
+        <CheckOutOuterContainer>
             {
                 cartCount ?
-                    <div className='checkout-inner-container'>
-                        <div className='checkout-header'>
-                            <div className='checkout-header-values'>
+                    <CheckOutInnerContainer>
+                        <CheckOutHeader className='checkout-header'>
+                            <CheckOutHeaderValues className='checkout-header-values'>
                                 <span>Product</span>
                                 <span>Description</span>
                                 <span>Quantity</span>
                                 <span>Quantity</span>
                                 <span>Price</span>
                                 <span>Remove</span>
-                            </div>
+                            </CheckOutHeaderValues>
                             <hr style={{
                                 color: '#000000',
                                 backgroundColor: '#000000',
                                 height: .5,
                                 borderColor: '#000000'
                             }}/>
-                        </div>
-                        <div className='check-out-items'>
+                        </CheckOutHeader>
+                        <CheckOutItems className='check-out-items'>
                             {items}
-                        </div>
-                        <div className='cart-price'>
+                        </CheckOutItems>
+                        <CartPrice className='cart-price'>
                             <h1>Total Price: ${cartPrice}</h1>
-                        </div>
-                    </div>
+                        </CartPrice>
+                    </CheckOutInnerContainer>
                     :
                     <div>
                         <h1>Cart is currently empty</h1>
@@ -46,7 +53,7 @@ function CheckOut() {
 
             }
 
-        </div>
+        </CheckOutOuterContainer>
     )
 
 }

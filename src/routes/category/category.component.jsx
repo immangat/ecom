@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {CategoriesContext} from "../../contexts/categoriesContext";
 import ProductCard from "../../components/product-card/product-card.component";
-import './category.styles.scss'
+import {CatContainer, CatItems} from './category.styles'
 
 function Category() {
 
@@ -20,14 +20,14 @@ function Category() {
         setProducts(categories[category])
     }, [category, categories])
     return (
-        <div className='category-container'>
+        <CatContainer className='category-container'>
             <h2 className='category-title'>
                 {category.toUpperCase()}
             </h2>
-            <div className='category-items'>
+            <CatItems className='category-items'>
                 {items}
-            </div>
-        </div>
+            </CatItems>
+        </CatContainer>
     )
 
 

@@ -1,4 +1,4 @@
-import './categories-preview.styles.scss'
+
 import {useContext} from "react";
 import {CategoriesContext} from "../../contexts/categoriesContext";
 import PreviewCategoryComponent from "../../components/preview-category/preview-category.component";
