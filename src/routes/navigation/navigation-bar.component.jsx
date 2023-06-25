@@ -29,9 +29,6 @@ function Navigation() {
                     <NavLink className="nav-link" to="/shop">
                         SHOP
                     </NavLink>
-                    <NavLink className="nav-link" to="/shop">
-                        CONTACT
-                    </NavLink>
                     {
                         currentUser ?
                             (<NavLink as='span' onClick={signOutHandler}> SIGN OUT</NavLink>)

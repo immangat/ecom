@@ -31,3 +31,7 @@ export const CartButton = styled(Button)`
   margin-top: auto;
 `
 
+export const EmptyMessage =  styled.span`
+  margin: 40px auto;
+`
+

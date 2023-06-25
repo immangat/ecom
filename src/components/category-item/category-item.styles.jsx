@@ -35,7 +35,7 @@ export const Card = styled.div`
   }
 `
 export const BackgroundImageContainer = styled.div`
-  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageurl }) => `url(${imageurl})`};
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -61,6 +61,7 @@ export const H2 = styled.h2`
   margin: 0 6px 0;
   font-size: 22px;
   color: #4a4a4a;
+  text-transform: uppercase;
 `
 
 export const Paragraph = styled.p`
