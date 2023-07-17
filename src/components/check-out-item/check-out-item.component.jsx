@@ -1,6 +1,6 @@
-import {CheckOutItemContainer,Quantity,Arrow,Image,Pointer } from './check-out-item.styles'
+import {CheckOutItemContainer, Quantity, Arrow, Image, Pointer} from './check-out-item.styles'
 import {useContext} from "react";
-import {CartContext} from "../../contexts/cart.context";
+import { CartContext } from "../../contexts/cart.context";
 
 function CheckOutItem({info}) {
 
@@ -16,8 +16,9 @@ function CheckOutItem({info}) {
             <Image src={imageUrl} alt={name}/>
             <span>{name}</span>
             <Quantity className='quantity'>
-                <Arrow onClick={() => decreaseQuantity(quantity, id)} className='clickable arrow'> &#10094; </Arrow>
-                <span > {quantity}</span>
+                <Arrow onClick={() => decreaseQuantity(quantity, id)}
+                       className='clickable arrow'> &#10094; </Arrow>
+                <span> {quantity}</span>
                 <Arrow onClick={() => addItemToCart(info)} className='clickable arrow'>&#10095;</Arrow>
             </Quantity>
             <span>{price}</span>
