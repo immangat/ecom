@@ -1,19 +1,18 @@
-import {Outlet, Link} from "react-router-dom";
-import {ReactComponent as Logo} from "../../assets/mlogo.svg";
-import {UserContext} from "../../contexts/user.context";
-import {useContext} from "react";
+import {Outlet} from "react-router-dom";
 import {signOutUser} from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
-import {CartContext} from "../../contexts/cart.context";
 import {NavigationContainer, NavLink, LogoContainer, NavLinkContainer, LogoImage} from "./navigation-bar.styles";
+import {useSelector} from "react-redux";
+import {selectCurrentUser} from "../../store/user/user.selector";
+import {selectCart} from "../../store/cart/cart.selector";
 
 function Navigation() {
-    const {currentUser, setCurrentUser} = useContext(UserContext)
-    const {openState} = useContext(CartContext)
+    const currentUser = useSelector(selectCurrentUser)
+    const {openState} = useSelector(selectCart)
     async function signOutHandler(){
         try{
-            const res = await signOutUser()
+            await signOutUser()
         } catch (error) {
 
         }

@@ -1,9 +1,8 @@
-import {useContext, useState} from "react";
+import {useState} from "react";
 import {SignUpContainer, HeadingSignUp, Form, ButtonContainer} from "./sign-up.styles";
 import {createUserDocumentFromAuth, createAuthUserWithEmailAndPassword} from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import {UserContext} from "../../contexts/user.context";
 function SignUpForm() {
 
     const emptyUserDetails = {
@@ -13,8 +12,6 @@ function SignUpForm() {
         confirmPassword: ""
 
     }
-
-    const {setCurrentUser} = useContext(UserContext)
 
     const [signUpFormData, setSignUpForm] = useState(emptyUserDetails)
 

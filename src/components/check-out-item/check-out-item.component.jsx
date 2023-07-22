@@ -1,14 +1,13 @@
 import {CheckOutItemContainer, Quantity, Arrow, Image, Pointer} from './check-out-item.styles'
-import {useContext} from "react";
-import { CartContext } from "../../contexts/cart.context";
+import {useDispatch, useSelector} from "react-redux";
+import {decreaseQuantity, removeItemFromCart, addItemtoCart} from "../../store/cart/cart.actions";
+import {selectCart} from "../../store/cart/cart.selector";
 
 function CheckOutItem({info}) {
 
-    const {
-        addItemToCart,
-        decreaseQuantity,
-        removeItemFromCart
-    } = useContext(CartContext)
+    const {cartItems} = useSelector(selectCart)
+    const dispatch = useDispatch()
+
 
     const {id, imageUrl, name, quantity, price} = info
     return (
@@ -16,13 +15,13 @@ function CheckOutItem({info}) {
             <Image src={imageUrl} alt={name}/>
             <span>{name}</span>
             <Quantity className='quantity'>
-                <Arrow onClick={() => decreaseQuantity(quantity, id)}
+                <Arrow onClick={() => dispatch(decreaseQuantity(cartItems, quantity, id))}
                        className='clickable arrow'> &#10094; </Arrow>
                 <span> {quantity}</span>
-                <Arrow onClick={() => addItemToCart(info)} className='clickable arrow'>&#10095;</Arrow>
+                <Arrow onClick={() => dispatch(addItemtoCart(cartItems, info))} className='clickable arrow'>&#10095;</Arrow>
             </Quantity>
             <span>{price}</span>
-            <Pointer onClick={() => removeItemFromCart(id)} className='clickable'>&#10005;</Pointer>
+            <Pointer onClick={() => dispatch(removeItemFromCart(cartItems, id))} className='clickable'>&#10005;</Pointer>
         </CheckOutItemContainer>
     )
 }

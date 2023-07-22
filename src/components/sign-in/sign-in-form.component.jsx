@@ -1,8 +1,7 @@
 import FormInput from "../form-input/form-input.component";
-import {useState, useContext} from "react";
+import {useState} from "react";
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import {signWithFirebaseEmailAndPassword, signInWithGooglePopup} from "../../utils/firebase/firebase.utils";
-import userContext, {UserContext} from "../../contexts/user.context";
 import {SignInContainer, Heading, SignForm, ButtonContainer} from "./sign-in-form.styles";
 
 
@@ -12,7 +11,6 @@ function SignInForm() {
         password: "",
 
     }
-    const {setCurrentUser} = useContext(UserContext)
     const [signInFormData, setSignInForm] = useState(emptyUserDetails)
 
     function handleInput(e) {

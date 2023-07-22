@@ -6,12 +6,14 @@ import {
     CheckOutItems,
     CheckOutOuterContainer
 } from './check-out.styles'
-import {useContext} from "react";
-import {CartContext} from "../../contexts/cart.context";
 import CheckOutItem from "../../components/check-out-item/check-out-item.component";
+import {useSelector} from "react-redux";
+import {selectCart, selectCartCount, selectCartPrice} from "../../store/cart/cart.selector";
 
 function CheckOut() {
-    const {cartItems, cartPrice, cartCount}= useContext(CartContext)
+    const {cartItems}= useSelector(selectCart)
+    const cartPrice = useSelector(selectCartPrice)
+    const cartCount = useSelector(selectCartCount)
     const items = cartItems ? cartItems.map(item =>
         <CheckOutItem
             key ={item.id}
