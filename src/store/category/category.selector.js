@@ -18,3 +18,9 @@ export const selectCategoryMap = createSelector(
         return acc
     },{}
 ))
+
+export const selectIsLoading = createSelector(
+
+    [selectCategoryReducer],
+    (cat) => cat.isLoading
+)

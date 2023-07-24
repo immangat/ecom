@@ -2,12 +2,13 @@
 
 import PreviewCategoryComponent from "../../components/preview-category/preview-category.component";
 import {useSelector} from "react-redux";
-import {selectCategoryMap} from "../../store/category/category.selector";
+import {selectCategoryMap, selectIsLoading} from "../../store/category/category.selector";
+import Spinner from "../../components/spinner/spinner.compnent";
 
 function CategoriesPreview() {
 
-    //const {categories} = useContext(CategoriesContext)
     const categories = useSelector(selectCategoryMap)
+    const isLoading = useSelector(selectIsLoading)
 
     const products = categories ? Object.keys(categories).map(title =>
         <div className='shop-container'>
@@ -20,7 +21,20 @@ function CategoriesPreview() {
     ) : ''
     return (
         <>
-            {products}
+            {
+                isLoading ?
+                    <div style={{
+                        display : "flex",
+                        justifyContent: "center",
+                        alignContent : "center",
+                    }}>
+                        <Spinner/>
+                    </div>
+
+                    :
+                    products
+            }
+
         </>
     )
 
