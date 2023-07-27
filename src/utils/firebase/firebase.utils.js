@@ -89,7 +89,7 @@ export async function createUserDocumentFromAuth(userAuth, otherDetails) {
             console.log('error creating the user', error.message)
         }
     }
-    return userDocRef
+    return userSnapchat
 }
 
 export async function createAuthUserWithEmailAndPassword(email, password) {
@@ -109,6 +109,19 @@ export async function signOutUser() {
 
 export function onAuthStateChangedListener(callback) {
     return onAuthStateChanged(auth, callback)
+}
+
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = onAuthStateChanged(
+            auth,
+            (userAuth) => {
+                unsubscribe();
+                resolve(userAuth)
+            },
+            reject
+        )
+    })
 }
 
 
