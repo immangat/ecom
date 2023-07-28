@@ -9,7 +9,7 @@ import {
 import CheckOutItem from "../../components/check-out-item/check-out-item.component";
 import {useSelector} from "react-redux";
 import {selectCart, selectCartCount, selectCartPrice} from "../../store/cart/cart.selector";
-
+import PaymentForm from "../../components/payment-form/payment-form.component";
 function CheckOut() {
     const {cartItems}= useSelector(selectCart)
     const cartPrice = useSelector(selectCartPrice)
@@ -21,6 +21,7 @@ function CheckOut() {
         />
     ) : ''
     return (
+        <>
         <CheckOutOuterContainer>
             {
                 cartCount ?
@@ -56,6 +57,10 @@ function CheckOut() {
             }
 
         </CheckOutOuterContainer>
+            <PaymentForm />
+    </>
+
+
     )
 
 }
